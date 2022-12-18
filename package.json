@@ -1,0 +1,19 @@
+{
+  "name": "magentotests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:headed:chrome": "npx cypress run --headed -b chrome",
+    "cy:headless:electron": "npx cypress run --headless -b electron"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^9.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
