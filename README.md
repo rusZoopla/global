@@ -46,56 +46,7 @@ export const searchForItem = (itemToSearchFor: string) => {
 }
 ```
 
-These functions can also be extracted into Cypress Custom Commands in `./cypress/support/commands.ts` file, e.g.
-
-```
-Cypress.Commands.add('clickElementByLabel', (elementLocator, label) => {
-  cy.contains(elementLocator, label)
-    .click();
-})
-```
-
-or a slightly more informative version of the same command:
-
-```
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      /**
-      * Get a DOM element based on elementLocator value
-      * @param elementLocator element locator string value
-      * @param label element label string value
-      * @example
-      * // this command
-      * cy.clickElementByLabel('button', 'Add to Cart')
-      * // will click on this element
-      * <button label="Add to Cart" />
-      */
-      clickElementByLabel(elementLocator: string, label: string):
-      Chainable<any>
-    }
-  }
-}
-
-Cypress.Commands.add('clickElementByLabel', (elementLocator, label) => {
-
-  Cypress.log({
-    displayName: 'clickELementByLabel',
-    message: {
-      elementLocator,
-      label
-    },
-    consoleProps() {
-      return {
-        selector: elementLocator
-      }
-    }
-  })
-
-  return cy.contains(elementLocator, label, { log: false })
-    .click();
-})
-```
+These functions can also be extracted into Cypress Custom Commands in `./cypress/support/commands.ts` file. There is one example implemented in that file, i.e. `clickElementByLabel` command. It is also called once in the spec file - line 66.
 
 3. Another way of abstracting the implementation could use of Page Object Model (POM) or even Component Object Model (COM). COM being different from POM in that instead of creating a file (or class) for each page we would create one for each significant component on a page, e.g. Header. But POM/COM adds an extra layer of complexity, therefore could be debatable whether it's needed or not. Same can be said about the use of Cucumber. Cypress Custom Commands usually do the job fine if no business folks need to read and understand the test scenarios. Engineers are usually OK with reading and understanding the code without those additional layers.
 

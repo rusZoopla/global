@@ -1,6 +1,9 @@
 describe("Magento", ()=> {
   it("searches for and adds items to cart", ()=> {
 
+    const VIEW_CART_LINK = "a.action.viewcart";
+    const VIEW_CART_LINK_TEXT = "View and Edit Cart";
+
     // navigate to the homepage of the app
     cy.visit("/");
 
@@ -59,8 +62,8 @@ describe("Magento", ()=> {
       .click();
 
     // once the dropdown cart snapshot appears, click on the "View and Edit Cart" link
-    cy.contains("a.action.viewcart", "View and Edit Cart")
-      .click();
+    // this is one of the Cypress Custom Command examples
+    cy.clickElementByLabel(VIEW_CART_LINK, VIEW_CART_LINK_TEXT)
 
     // assert shopping cart page heading
     cy.get("span.base")
