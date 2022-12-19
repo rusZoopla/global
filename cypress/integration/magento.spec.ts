@@ -7,6 +7,9 @@ describe("Magento", ()=> {
     // navigate to the homepage of the app
     cy.visit("/");
 
+    // set viewport to desktop
+    cy.viewport(1024, 768);
+
     /// search for the tee
     cy.get("#search")
       .clear()
